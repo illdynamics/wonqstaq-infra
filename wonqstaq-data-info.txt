@@ -1,0 +1,199 @@
+===
+
+wonqstaq - disk layout and configuration (LVM)
+===
+
+Local disks outside of the LVM configuration
+===
+
+---
+
+Device         Start        End    Sectors   Size Type
+/dev/nvme1n1p1  2048 2000408575 2000406528 953,9G Linux filesystem
+
+
+Disk /dev/nvme0n1: 953,87 GiB, 1024209543168 bytes, 2000409264 sectors
+Disk model: SAMSUNG MZVL21T0HCLR-00B00
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 7A540938-CEF7-40F4-8899-EE3E36F20FE6
+
+Device           Start        End    Sectors  Size Type
+/dev/nvme0n1p1    2048    2000895    1998848  976M BIOS boot
+/dev/nvme0n1p2 2000896    4001791    2000896  977M Linux filesystem
+/dev/nvme0n1p3 4001792    6002687    2000896  977M EFI System
+/dev/nvme0n1p4 6002688 2000408575 1994405888  951G Linux filesystem
+
+
+Physical Volumes:
+---
+  PV             VG    Fmt  Attr   PSize    PFree
+  /dev/sda1      boxvg lvm2 a--    <20,01t  0 
+  /dev/sdb1      boxvg lvm2 a--    <20,01t  0 
+  /dev/sdc1      recvg lvm2 a--    <20,01t  0 
+  /dev/sdd1      recvg lvm2 a--    <20,01t  0 
+---
+/dev/sda1
+  VG Name               boxvg
+  PV Size               <20,01 TiB / not usable 2,98 MiB
+  Allocatable           yes (but full)
+  PE Size               4,00 MiB
+  Total PE              5245439
+  Free PE               0
+  Allocated PE          5245439
+  PV UUID               BLQsKZ-9cF0-VTJo-YcHb-4Nzn-x9IR-uyJFGE
+---
+/dev/sdb1
+  VG Name               boxvg
+  PV Size               <20,01 TiB / not usable 2,98 MiB
+  Allocatable           yes (but full)
+  PE Size               4,00 MiB
+  Total PE              5245439
+  Free PE               0
+  Allocated PE          5245439
+  PV UUID               b3ad8q-Uvj5-FhKf-pFhH-DfSH-rmVW-YRcD2R
+---
+/dev/sdc1
+  VG Name               recvg
+  PV Size               <20,01 TiB / not usable 2,98 MiB
+  Allocatable           yes (but full)
+  PE Size               4,00 MiB
+  Total PE              5245439
+  Free PE               0
+  Allocated PE          5245439
+  PV UUID               UJ6FxE-Kg2R-WOZG-0oeq-y5Fa-xb7V-Qe5vVO
+---
+/dev/sdd1
+  VG Name               recvg
+  PV Size               <20,01 TiB / not usable 2,98 MiB
+  Allocatable           yes (but full)
+  PE Size               4,00 MiB
+  Total PE              5245439
+  Free PE               0
+  Allocated PE          5245439
+  PV UUID               WAxiVB-uhCM-69fb-3wPL-pkmC-X6q0-0PMpMC
+---
+
+
+===
+
+LVM Current Configuration
+===
+
+Volume Groups:
+  VG             PV LV SN   Attr   VSize    VFree
+  boxvg          2  1  0    wz--n- <40,02t  0
+  recvg          2  1  0    wz--n- <40,02t  0
+
+boxvg
+  System ID             
+  Format                lvm2
+  Metadata Areas        2
+  Metadata Sequence No  2
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                1
+  Open LV               1
+  Max PV                0
+  Cur PV                2
+  Act PV                2
+  VG Size               <40,02 TiB
+  PE Size               4,00 MiB
+  Total PE              10490878
+  Alloc PE / Size       10490878 / <40,02 TiB
+  Free  PE / Size       0 / 0   
+  VG UUID               67xL14-idJE-A53u-iocW-FnaA-m8ih-8SZCqq
+
+recvg
+  System ID
+  Format                lvm2
+  Metadata Areas        2
+  Metadata Sequence No  2
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                1
+  Open LV               1
+  Max PV                0
+  Cur PV                2
+  Act PV                2
+  VG Size               <40,02 TiB
+  PE Size               4,00 MiB
+  Total PE              10490878
+  Alloc PE / Size       10490878 / <40,02 TiB
+  Free  PE / Size       0 / 0
+  VG UUID               zCjXKb-wy9I-2CAl-IZmP-Q1FB-6MIS-F2pbon
+
+
+===
+
+Logical Volumes:
+  LV    VG                  Attr            LSize
+  boxlv boxvg               -wi-ao----      <40,02t
+  reclv recvg               -wi-ao----      <40,02t
+
+===
+
+boxlv
+  LV Path                /dev/boxvg/boxlv
+  LV Name                boxlv
+  VG Name                boxvg
+  LV UUID                UZrtfs-R5sG-c9gC-dH3y-hKQg-XJIL-KWhOKg
+  LV Write Access        read/write
+  LV Creation host, time wqn.wickednet.nl, 2024-08-18 21:40:05 +0200
+  LV Status              available
+  # open                 1
+  LV Size                <40,02 TiB
+  Current LE             10490878
+  Segments               2
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           252:0
+
+reclv
+  LV Path                /dev/recvg/reclv
+  LV Name                reclv
+  VG Name                recvg
+  LV UUID                O2JQ5e-cNyT-C614-KOaS-m6QC-d9kM-0noSsU
+  LV Write Access        read/write
+  LV Creation host, time wqn.wickednet.nl, 2024-08-18 21:40:14 +0200
+  LV Status              available
+  # open                 1
+  LV Size                <40,02 TiB
+  Current LE             10490878
+  Segments               2
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           252:1
+
+
+===
+
+
+===
+
+blkid output:
+===
+
+/dev/mapper/boxvg-boxlv: LABEL="boxfs" UUID="26689607-9706-4745-9546-4dbc070013a1" BLOCK_SIZE="4096" TYPE="xfs"
+/dev/mapper/recvg-reclv: LABEL="recfs" UUID="675a7e74-025b-4ae3-a7ca-c164d53230fc" BLOCK_SIZE="4096" TYPE="xfs"
+/dev/nvme0n1p1: PARTUUID="5acc9ce4-e145-40bd-8140-bc0f6a84d5f3"
+/dev/nvme0n1p2: UUID="c0303d08-c863-4b2e-83c9-bad34d154c3c" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="5b393ae9-d045-4e13-a8e3-877a84182d35"
+/dev/nvme0n1p3: UUID="D52B-19BB" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="80f79da6-9f66-404e-8417-892854d7d054"
+/dev/nvme0n1p4: UUID="56f28e12-7605-4d4a-9c4a-24230d5ec9cf" BLOCK_SIZE="512" TYPE="xfs" PARTUUID="7f6ba460-ccb7-45dc-90d4-2d7204ff6fdb"
+/dev/nvme1n1p1: UUID="16b6b3ca-c553-42fb-8fc7-f71c2596bd22" BLOCK_SIZE="512" TYPE="xfs" PARTUUID="7c6ce724-ac3c-46b7-9af3-8699dc8c3810"
+/dev/sda1: UUID="BLQsKZ-9cF0-VTJo-YcHb-4Nzn-x9IR-uyJFGE" TYPE="LVM2_member" PARTUUID="cb164038-18cc-2741-a5ef-a0d3239173d8"
+/dev/sdb1: UUID="b3ad8q-Uvj5-FhKf-pFhH-DfSH-rmVW-YRcD2R" TYPE="LVM2_member" PARTUUID="a76dc3db-60f5-d046-89ee-e71078893f3b"
+/dev/sdc1: UUID="UJ6FxE-Kg2R-WOZG-0oeq-y5Fa-xb7V-Qe5vVO" TYPE="LVM2_member" PARTUUID="cdc081f4-8536-5846-9dac-9525188389de"
+/dev/sdd1: UUID="WAxiVB-uhCM-69fb-3wPL-pkmC-X6q0-0PMpMC" TYPE="LVM2_member" PARTUUID="1ccba657-7ddc-934c-9fb8-d09e98173f8a"
+/dev/sde1: BLOCK_SIZE="2048" UUID="2024-02-20-19-39-27-00" LABEL="Ubuntu 22.04.4 LTS amd64" TYPE="iso9660" PARTLABEL="ISO9660" PARTUUID="abbd44c4-640c-4cea-acca-ca38273f602e"
+/dev/sde2: SEC_TYPE="msdos" LABEL_FATBOOT="ESP" LABEL="ESP" UUID="927C-33D8" BLOCK_SIZE="512" TYPE="vfat" PARTLABEL="Appended2" PARTUUID="abbd44c4-640c-4cea-acc9-ca38273f602e"
+/dev/sde3: PARTLABEL="Gap1" PARTUUID="abbd44c4-640c-4cea-acc8-ca38273f602e"
+/dev/sde4: LABEL="writable" UUID="98cc8813-6e47-4f21-8aa1-18f56ba4fe6d" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="d575a690-2c7a-ba46-955f-4542b8448412"
+
+===
